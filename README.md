@@ -2,9 +2,9 @@
 Remove all WMI instances and class of WannaMine malware.
 
 In my environment, this malware use the following malicious name:
-**Win32_Services**, this malicious class was found in root\default namespace
-**DSM Event Log Consumer**, this malicious instance was found in root\subscription namespace
-**DSM Event Log Filter**, this malicious instance was found in root\subscription namespace
+- **Win32_Services**, this malicious class was found in root\default namespace
+- **DSM Event Log Consumer**, this malicious instance was found in root\subscription namespace
+- **DSM Event Log Filter**, this malicious instance was found in root\subscription namespace
 
 
 **Step 1**
