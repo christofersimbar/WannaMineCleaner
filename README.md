@@ -46,7 +46,7 @@ Bottom part of EventConsumer content
 
 # Step 2
 
-Modify WannaMineCleaner script to match the malicous class and instance name in your environment.
+Modify *main.ps1* to match the malicous class and instance name in your environment.
 
 In my environment the malware use **Win32_Services** for its malicious class name. I found it by analyzing the decoded script source code.
 ```
@@ -70,7 +70,7 @@ Invoke-Command -ComputerName $namaserver {Get-WmiObject __FilterToConsumerBindin
 
 # Step 3
 
-Prepare the list of target servers, save them in *daftarserver.txt* (you can choose other name, but make sure to modify the WannaMineCleaner.
+Prepare the list of target servers, save them in *daftarserver.txt* (you can choose other name, but make sure to modify the *main.ps1*.
 
 For example:
 ```
