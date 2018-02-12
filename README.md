@@ -48,6 +48,26 @@ Bottom part of EventConsumer content
 
 Modify WannaMineCleaner script to match the malicous class and instance name in your environment.
 
+In my environment the malware use **Win32_Services** for its malicious class name. I found it by analyzing the decoded script source code.
+```
+Invoke-Command -ComputerName $namaserver {Remove-WmiObject -Namespace root\default -Class Win32_Services}
+```
+
+For EventFilter instance name, the malware use **DSM Event Log Filter**. Change this to one you found in payload source code.
+```
+Invoke-Command -ComputerName $namaserver {Get-WmiObject __EventFilter -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Log Filter'} | Remove-WmiObject}
+```
+
+For EventConsumer instance name, the malware use **DSM Event Log Consumer**. Change this to the one you found in payload source code.
+```
+Invoke-Command -ComputerName $namaserver {Get-WmiObject CommandLineEventConsumer -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Log Consumer'} | Remove-WmiObject}
+```
+
+The last part is FilterToConsumerBinding instance name. Change **DSM Event Log Consumer** to match EventConsumer name. 
+```
+Invoke-Command -ComputerName $namaserver {Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription | Where-Object {$_.filter -match 'DSM Event Log Consumer'} | Remove-WmiObject}
+```
+
 # Step 3
 
 Prepare the list of target servers, save them in *daftarserver.txt* (you can choose other name, but make sure to modify the WannaMineCleaner.
