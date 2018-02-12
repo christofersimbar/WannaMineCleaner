@@ -30,7 +30,7 @@ Modify WannaMineCleaner script to match the malicous class and instance name in 
 
 **Step 3**
 
-Prepare the list of target servers, saved them in daftarserver.txt (you can choose other name, but make sure to modify the WannaMineCleaner. For example:
+Prepare the list of target servers, save them in *daftarserver.txt* (you can choose other name, but make sure to modify the WannaMineCleaner. For example:
 ```
 servername1.yourdomainname
 servername2.yourdomainname
@@ -39,4 +39,4 @@ servername3.yourdomainname
 
 **Step 4**
 
-Run the WannaMineCleaner in one of domain member PC. Make sure you have sufficient access to those servers.
+Run main.ps1 in one of domain member PC. Make sure you have sufficient access to those servers.
