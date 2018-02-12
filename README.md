@@ -82,3 +82,8 @@ servername3.yourdomainname
 # Step 4
 
 Run *main.ps1* in one of domain member PC. Make sure you have sufficient access to those servers.
+
+# References
+- http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf
+- https://www.crowdstrike.com/blog/cryptomining-harmless-nuisance-disruptive-threat/
+- http://www.exploit-monday.com/2016/08/wmi-persistence-using-wmic.html
