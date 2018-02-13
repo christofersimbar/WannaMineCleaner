@@ -2,6 +2,10 @@ foreach($namaserver in Get-Content .\daftarserver.txt) {
   #kill WMI process
   Invoke-Command -ComputerName $namaserver {stop-process -Name WmiPrvSE.exe}
   
+  #kill powershell process, to prevent malware creates new WMI class
+  #WARNING! this command will also kill legitimate powershell process
+  Invoke-Command -ComputerName $namaserver {stop-process -Name powershell.exe}
+  
   #remove malicious WMI class
   #change 'Win32_Services' to match your environment
   Invoke-Command -ComputerName $namaserver {Remove-WmiObject -Namespace root\default -Class Win32_Services}
