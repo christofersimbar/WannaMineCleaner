@@ -6,6 +6,10 @@ foreach($server in Get-Content .\daftarserver.txt) {
   $pass = ConvertTo-SecureString -AsPlainText $Password -Force
   $credential = New-Object System.Management.Automation.PSCredential -ArgumentList $Username,$pass  
 
+  #kill Powershell process
+  #WARNING! This will also kill legitimate powershell process
+  #Invoke-Command -ComputerName $server -credential $credential {stop-process -Name powershell.exe}
+
   #kill WMI process
   Invoke-Command -ComputerName $server -credential $credential {stop-process -Name WmiPrvSE.exe}
   
@@ -13,11 +17,11 @@ foreach($server in Get-Content .\daftarserver.txt) {
   Invoke-Command -ComputerName $server -credential $credential {Remove-WmiObject -Namespace root\default -Class Win32_Services}
   
   #remove malicious __FilterToConsumerBinding instance
-  Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription | Where-Object {$_.filter -match 'DSM Event'} | Remove-WmiObject}
+  Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription | Where-Object {$_.filter -match 'DSM Event Logs Filter'} | Remove-WmiObject}
 
   #remove malicious __EventFilter instance
-Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject __EventFilter -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event'} | Remove-WmiObject}
+Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject __EventFilter -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Logs Consumer'} | Remove-WmiObject}
 
   #remove malicious __CommandLineEventConsumer instance
-Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject CommandLineEventConsumer -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event'} | Remove-WmiObject}
+Invoke-Command -ComputerName $server -credential $credential {Get-WmiObject CommandLineEventConsumer -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Logs Consumer'} | Remove-WmiObject}
 }
