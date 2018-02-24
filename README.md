@@ -3,8 +3,8 @@ Remove all WMI instances and class of WannaMine malware.
 
 In my environment, this malware uses the following malicious name:
 - **Win32_Services**, this malicious class was found in root\default namespace
-- **DSM Event Logs Consumer**, this malicious instance was found in root\subscription namespace
-- **DSM Event Logs Filter**, this malicious instance was found in root\subscription namespace
+- **DSM Event Log Consumer**, this malicious instance was found in root\subscription namespace
+- **DSM Event Log Filter**, this malicious instance was found in root\subscription namespace
 
 
 # Step 1
@@ -54,20 +54,21 @@ In my environment this malware uses **Win32_Services** for its malicious class n
 Invoke-Command -ComputerName $namaserver {Remove-WmiObject -Namespace root\default -Class Win32_Services}
 ```
 
-For EventFilter instance name, this malware uses **DSM Event Logs Filter**. Change this to the one you found in payload source code.
+For EventFilter instance name, this malware uses **DSM Event Log Filter**. Change this to the one you found in payload source code.
 ```
-Invoke-Command -ComputerName $namaserver {Get-WmiObject __EventFilter -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Logs Filter'} | Remove-WmiObject}
-```
-
-For EventConsumer instance name, this malware uses **DSM Event Logs Consumer**. Change this to the one you found in payload source code.
-```
-Invoke-Command -ComputerName $namaserver {Get-WmiObject CommandLineEventConsumer -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Logs Consumer'} | Remove-WmiObject}
+Invoke-Command -ComputerName $namaserver {Get-WmiObject __EventFilter -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Log Filter'} | Remove-WmiObject}
 ```
 
-The last part is FilterToConsumerBinding instance name. Change **DSM Event Logs Consumer** to match EventConsumer name. 
+For EventConsumer instance name, this malware uses **DSM Event Log Consumer**. Change this to the one you found in payload source code.
 ```
-Invoke-Command -ComputerName $namaserver {Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription | Where-Object {$_.filter -match 'DSM Event Logs Consumer'} | Remove-WmiObject}
+Invoke-Command -ComputerName $namaserver {Get-WmiObject CommandLineEventConsumer -Namespace root\subscription | Where-Object {$_.name -match 'DSM Event Log Consumer'} | Remove-WmiObject}
 ```
+
+The last part is FilterToConsumerBinding instance name. Change **DSM Event Log Filter** to match EventFilter name. 
+```
+Invoke-Command -ComputerName $namaserver {Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription | Where-Object {$_.filter -match 'DSM Event Log Filter'} | Remove-WmiObject}
+```
+You can also just use **DSM Event** to match all name containing words "DSM Event"
 
 # Step 3
 
