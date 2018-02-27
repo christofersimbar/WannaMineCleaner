@@ -6,12 +6,10 @@ foreach($server in Get-Content .\daftarserver.txt) {
   $pass = ConvertTo-SecureString -AsPlainText $Password -Force
   $credential = New-Object System.Management.Automation.PSCredential -ArgumentList $Username,$pass  
 
-  #kill Powershell process
-  #WARNING! This will also kill legitimate powershell process
-  #Invoke-Command -ComputerName $server -credential $credential {stop-process -Name powershell.exe}
-
-  #kill WMI process
-  Invoke-Command -ComputerName $server -credential $credential {stop-process -Name WmiPrvSE.exe}
+  #kill malicious processes identified by their command line
+  #change 'Win32_Services' to match your environment
+  Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%Win32_Services%'").Terminate()}
+  Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%info6.ps1%'").Terminate()}
   
   #remove malicious WMI class
   Invoke-Command -ComputerName $server -credential $credential {Remove-WmiObject -Namespace root\default -Class Win32_Services}
