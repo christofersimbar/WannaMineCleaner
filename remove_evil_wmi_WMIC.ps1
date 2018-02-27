@@ -1,8 +1,8 @@
 foreach($ip in Get-Content .\serverlist.txt) {
   #save all target IP in serverlist.txt
-  echo "==================================="
-  echo "Processing $ip ..."
-  echo "==================================="
+  Write-Output "==================================="
+  Write-Output "Processing $ip ..."
+  Write-Output "==================================="
   
   #these lines are used to kill malicious process which can be identified by their command line
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%default:Win32_Services%'" CALL TERMINATE
