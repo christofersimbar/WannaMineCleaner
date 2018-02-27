@@ -5,7 +5,7 @@ foreach($servername in Get-Content .\daftarserver.txt) {
   echo "==================================="
   
   #these lines are used to kill malicious process which can be identified by their command line
-  wmic /node:$servername process WHERE "COMMANDLINE LIKE '%Win32_Services%'" CALL TERMINATE
+  wmic /node:$servername process WHERE "COMMANDLINE LIKE '%default:Win32_Services%'" CALL TERMINATE
   wmic /node:$servername process WHERE "COMMANDLINE LIKE '%info6.ps1%'" CALL TERMINATE
 
   wmic /node:$servername /NAMESPACE:"\\root\default" PATH Win32_Service DELETE
