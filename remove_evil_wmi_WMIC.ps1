@@ -1,5 +1,5 @@
 foreach($ip in Get-Content .\serverlist.txt) {
-
+  #save all target IP in serverlist.txt
   echo "==================================="
   echo "Processing $ip ..."
   echo "==================================="
