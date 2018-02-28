@@ -1,4 +1,4 @@
-foreach($ip in Get-Content .\daftarserver.txt) {
+foreach($ip in Get-Content .\serverlist.txt) {
   #save all target IP in serverlist.txt
   Write-Output "==================================="
   Write-Output "Processing $ip ..."
