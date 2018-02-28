@@ -8,7 +8,7 @@ foreach($ip in Get-Content .\serverlist.txt) {
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%default:Win32_Services%'" CALL TERMINATE
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%info6.ps1%'" CALL TERMINATE
   wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\UpdateService.exe'" CALL TERMINATE
-  wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\AppCache\17_\\java.exe'" CALL TERMINATE
+  wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\AppCache\\17_\\java.exe'" CALL TERMINATE
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%JABzAHQAaQBtAGUAPQBbAEUAbgB2AGkAcgBvAG4AbQBlAG4AdABdADoAOgBUAG%'" CALL TERMINATE
 
   #change "Win32_Services" and "DSM Event" to match evil class and instance name found in your environment
