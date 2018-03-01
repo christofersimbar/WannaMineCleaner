@@ -1,5 +1,4 @@
-foreach($ip in Get-Content .\serverlist.txt) {
-  #save all target IP in serverlist.txt
+foreach($ip in Get-Content .\daftarserver.txt) {
   Write-Output "==================================="
   Write-Output "Processing $ip ..."
   Write-Output "==================================="
@@ -8,9 +7,14 @@ foreach($ip in Get-Content .\serverlist.txt) {
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%default:Win32_Services%'" CALL TERMINATE
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%info6.ps1%'" CALL TERMINATE
   wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\UpdateService.exe'" CALL TERMINATE
-  wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\AppCache\\16\\java.exe'" CALL TERMINATE
   wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\AppCache\\17_\\java.exe'" CALL TERMINATE
+  wmic /node:$ip process WHERE "ExecutablePath='C:\\ProgramData\\AppCache\\16\\java.exe'" CALL TERMINATE
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%JABzAHQAaQBtAGUAPQBbAEUAbgB2AGkAcgBvAG4AbQBlAG4AdABdADoAOgBUAG%'" CALL TERMINATE
+
+  #delete all malicious files
+  WMIC /node:$ip path cim_datafile WHERE "path='C:\\ProgramData\\UpdateService.exe'" delete
+  WMIC /node:$ip path cim_datafile WHERE "path='C:\\ProgramData\\AppCache\\17_\\java.exe'" delete
+  WMIC /node:$ip path cim_datafile WHERE "path='C:\\ProgramData\\AppCache\\16\\java.exe'" delete
 
   #change "Win32_Services" and "DSM Event" to match evil class and instance name found in your environment
   wmic /node:$ip /NAMESPACE:"\\root\default" PATH Win32_Services DELETE
