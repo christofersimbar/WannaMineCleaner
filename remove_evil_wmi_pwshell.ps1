@@ -3,6 +3,8 @@ foreach($namaserver in Get-Content .\daftarserver.txt) {
   #change 'Win32_Services' to match your environment
   Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%default:Win32_Services%'").Terminate()}
   Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%info6.ps1%'").Terminate()}
+  Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%info3.ps1%'").Terminate()}
+  Invoke-Command -ComputerName $namaserver {(Get-WmiObject win32_process -filter "CommandLine LIKE '%info9.ps1%'").Terminate()}
   
   #remove malicious WMI class
   #change 'Win32_Services' to match your environment
