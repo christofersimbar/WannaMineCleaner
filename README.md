@@ -7,7 +7,7 @@ In my environment, this malware uses the following malicious name:
 - **DSM Event Log Filter**, this malicious instance was found in root\subscription namespace
 
 
-Find the name of malicious Class and instance. You can use the following command to find the name of malicious Class and instances.
+Before using this script, identify the name of malicious Class and instance. You can use the following command to find the name of malicious Class and instances.
 ```
 wmic/namespace:\\root\subscription PATH __EventConsumer get/format:list
 
