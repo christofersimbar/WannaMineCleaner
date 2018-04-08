@@ -1,16 +1,17 @@
 write-output "" | out-file "failed.txt"
-foreach($ip in Get-Content .\daftarserver.txt) {
+foreach($ip in Get-Content .\serverlist.txt) {
   Write-Output "===================================" 
   Write-Output "Processing $ip ..." 
   
   gwmi win32_bios -ComputerName $ip -ErrorAction SilentlyContinue -ErrorVariable err
 
   if ($err) {
-    write-output "$ip" | out-file -append "failed.txt"
+    $msg = $Error[0].Exception.Message
+    write-output "$ip # $msg" | out-file -append "failed.txt"
     continue
   }
   
-  Write-Host "Connection on computer $ip successful." -ForegroundColor DarkGreen;
+  Write-Host "Connection on computer $ip successful." -ForegroundColor DarkGreen
 
   #these lines are used to kill malicious process which can be identified by their command line or path
   wmic /node:$ip process WHERE "COMMANDLINE LIKE '%default:Win32_Services%'" CALL TERMINATE
