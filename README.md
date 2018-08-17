@@ -1,4 +1,4 @@
-# WannaMineCleaner
+# WannaMine Cleaner
 Remove all WMI instances and class of WannaMine malware.
 
 In my environment, this malware uses the following malicious name:
