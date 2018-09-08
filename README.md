@@ -26,10 +26,10 @@ Here are some examples found in my environment:
 
 ### EventConsumer
 
-![Payload EventConsumer](https://github.com/christofersimbar/WannaMineCleaner/blob/master/payload_EventConsumer.png)
+![Payload EventConsumer](screenshots/payload_EventConsumer.png)
 
 Bottom part of EventConsumer content
-![Payload EventConsumer2](https://github.com/christofersimbar/WannaMineCleaner/blob/master/payload_EventConsumer2.png)
+![Payload EventConsumer2](screenshots/payload_EventConsumer2.png)
 
 To easily copy the encoded payload, you can save the output directly to a file using this command:
 ```
@@ -38,10 +38,10 @@ wmic/namespace:\\root\subscription PATH __EventConsumer get/format:list > payloa
 
 
 ### EventFilter
-![Payload EventFilter](https://github.com/christofersimbar/WannaMineCleaner/blob/master/payload_EventFilter.png)
+![Payload EventFilter](screenshots/payload_EventFilter.png)
 
 ### FilterToConsumerBinding
-![Payload FilterToConsumerBinding](https://github.com/christofersimbar/WannaMineCleaner/blob/master/payload_FilterToConsumerBinding.png)
+![Payload FilterToConsumerBinding](screenshots/payload_FilterToConsumerBinding.png)
 
 # References
 - http://la.trendmicro.com/media/misc/understanding-wmi-malware-research-paper-en.pdf
